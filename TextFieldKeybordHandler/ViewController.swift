@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var activeTextField = UITextField()
+    var activeTextField : UITextField?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
-        self.activeTextField.resignFirstResponder()
+        self.activeTextField?.resignFirstResponder()
     }
     
     @objc func keyboardWillShow(notification:NSNotification) {
@@ -35,6 +35,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func keyboardWillHide(notification:NSNotification) {
+        self.activeTextField?.resignFirstResponder()
         resetContentInset()
     }
     
@@ -63,7 +64,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.activeTextField.resignFirstResponder()
+        self.activeTextField?.resignFirstResponder()
         return true
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
